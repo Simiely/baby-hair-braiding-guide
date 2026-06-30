@@ -19,6 +19,8 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
         
         .container {
@@ -29,6 +31,7 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
             border-radius: 20px;
             overflow: hidden;
+            transform-origin: center center;
         }
         
         .card {
@@ -387,6 +390,27 @@
     </div>
 
     <script>
+        const CARD_W = 405;
+        const CARD_H = 720;
+        const container = document.getElementById('container');
+        
+        function resizeContainer() {
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            const padding = 20;
+            const maxW = vw - padding * 2;
+            const maxH = vh - padding * 2;
+            
+            const scaleW = maxW / CARD_W;
+            const scaleH = maxH / CARD_H;
+            const scale = Math.min(scaleW, scaleH);
+            
+            container.style.transform = 'scale(' + scale + ')';
+        }
+        
+        window.addEventListener('resize', resizeContainer);
+        resizeContainer();
+        
         let currentCard = 0;
         const totalCards = 7;
         const cards = document.querySelectorAll('.card');
